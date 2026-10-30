@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 330" width="100%" height="100%">
+    <!-- Background Canvas -->
+    <rect width="600" height="330" fill="#0b1329" rx="8"/>
+    <rect width="600" height="330" fill="url(#grid)"/>
+    
+<defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#334155" stroke-width="0.5" stroke-opacity="0.4"/>
+    </pattern>
+    <linearGradient id="slabGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#94a3b8"/>
+        <stop offset="100%" stop-color="#64748b"/>
+    </linearGradient>
+    <linearGradient id="steelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#f59e0b"/>
+        <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+    <linearGradient id="primerGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#10b981"/>
+        <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+</defs>
+
+    <!-- Title Banner -->
+    <rect x="0" y="0" width="600" height="34" fill="#1e293b"/>
+    <text x="20" y="22" fill="#f59e0b" font-family="sans-serif" font-size="12" font-weight="bold" letter-spacing="0.5">STEP 1: REMOVAL OF PLASTER & SURFACE PREPARATION</text>
+    
+        <!-- Concrete Slab Base -->
+        <rect x="40" y="45" width="520" height="85" fill="url(#slabGrad)" rx="4"/>
+        <text x="50" y="70" fill="#f8fafc" font-family="sans-serif" font-size="12" font-weight="bold">EXISTING RCC SLAB SUBSTRATE</text>
+        
+        <!-- Rebar inside slab -->
+        <line x1="50" y1="95" x2="550" y2="95" stroke="#334155" stroke-width="6" stroke-dasharray="14,6"/>
+        
+        <!-- Old Plaster Layer being chipped -->
+        <path d="M 40 130 L 250 130 L 250 160 L 40 160 Z" fill="#cbd5e1" stroke="#94a3b8"/>
+        <text x="50" y="150" fill="#475569" font-family="sans-serif" font-size="11">Old Deteriorated Plaster (To be removed)</text>
+        
+        <!-- Chisel & Chipping Action -->
+        <polygon points="250,130 280,110 290,120 260,140" fill="#f59e0b"/>
+        <line x1="285" y1="115" x2="350" y2="70" stroke="#d97706" stroke-width="8" stroke-linecap="round"/>
+        
+        <!-- Flying Debris / Chipped pieces -->
+        <circle cx="270" cy="150" r="5" fill="#94a3b8"/>
+        <polygon points="280,165 290,155 295,170" fill="#cbd5e1"/>
+        <circle cx="305" cy="145" r="4" fill="#64748b"/>
+        
+        <!-- Exposed sound substrate -->
+        <path d="M 250 130 L 560 130" stroke="#f59e0b" stroke-width="3" stroke-dasharray="4,4"/>
+        <text x="270" y="150" fill="#10b981" font-family="sans-serif" font-size="11" font-weight="bold">Sound Concrete Exposed &amp; Cleaned</text>
+        
+        <!-- Technical Badge -->
+        <rect x="40" y="250" width="520" height="65" fill="#1e293b" rx="6" stroke="#334155"/>
+        <text x="60" y="275" fill="#f59e0b" font-family="sans-serif" font-size="12" font-weight="bold">KEY ACTION: Mechanical Chipping down to Parent Concrete</text>
+        <text x="60" y="295" fill="#94a3b8" font-family="sans-serif" font-size="11">Remove all hollow plaster, carbonated crust, dust &amp; grease. Expose sound aggregate surface.</text>
+        
+</svg>

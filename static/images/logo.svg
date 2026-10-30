@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">
+    <rect width="80" height="80" rx="16" fill="#0f172a"/>
+    <rect x="2" y="2" width="76" height="76" rx="14" fill="none" stroke="#f59e0b" stroke-width="2"/>
+    <!-- Structural I-Beam symbol -->
+    <path d="M 18 18 L 62 18 L 62 26 L 44 26 L 44 54 L 62 54 L 62 62 L 18 62 L 18 54 L 36 54 L 36 26 L 18 26 Z" fill="#f59e0b"/>
+    <!-- AI Eye / Scanner line -->
+    <circle cx="40" cy="40" r="7" fill="#38bdf8"/>
+    <circle cx="40" cy="40" r="3" fill="#ffffff"/>
+    <line x1="14" y1="40" x2="66" y2="40" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="3,2"/>
+</svg>

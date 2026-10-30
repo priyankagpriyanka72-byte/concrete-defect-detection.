@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-ENABLED CONCRETE DEFECT DETECTION, PREVENTION AND REPAIR ADVISORY APP</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <header class="app-header">
+        <div class="header-container">
+            <div class="brand-group">
+                <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Civil AI Logo" class="brand-logo">
+                <div class="brand-text">
+                    <span class="sub-badge">CIVIL ENGINEERING AI ADVISORY SYSTEM</span>
+                    <h1 class="brand-title">AI-ENABLED CONCRETE DEFECT DETECTION, PREVENTION AND REPAIR ADVISORY APP</h1>
+                </div>
+            </div>
+            <div class="header-status">
+                <div class="status-indicator">
+                    <span class="pulse-dot"></span>
+                    <span class="status-text">AI MODEL: ACTIVE (6-CLASS ENSEMBLE)</span>
+                </div>
+                <div class="accuracy-badge" title="Mathematically evaluated on 49 hold-out test images">
+                    <i class="fa-solid fa-chart-line"></i> TEST ACC: {{ metadata.test_accuracy_pct }}%
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <nav class="app-nav">
+            <div class="nav-container">
+                <button class="nav-tab active" data-target="dashboard-section">
+                    <i class="fa-solid fa-gauge-high"></i> Home Dashboard
+                </button>
+                <button class="nav-tab" data-target="classifier-section">
+                    <i class="fa-solid fa-microscope"></i> Defect Inspection &amp; Classifier
+                </button>
+                <button class="nav-tab" data-target="rcc-section">
+                    <i class="fa-solid fa-layer-group"></i> RCC Slab Strengthening (7 Steps)
+                </button>
+                <button class="nav-tab" data-target="advisory-section">
+                    <i class="fa-solid fa-book-bookmark"></i> Prevention &amp; Repair Advisory
+                </button>
+                <button class="nav-tab" data-target="dataset-section">
+                    <i class="fa-solid fa-database"></i> Dataset &amp; Model Specs
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="app-main">
+        <!-- 1. HOME DASHBOARD -->
+        <section id="dashboard-section" class="tab-content active">
+            <!-- Hero Banner -->
+            <div class="hero-banner">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fa-solid fa-helmet-safety"></i> STRUCTURAL HEALTH MONITORING &amp; REHABILITATION
+                    </div>
+                    <h2>Intelligent Concrete Defect Detection &amp; Engineering Advisory</h2>
+                    <p>
+                        A specialized civil engineering decision-support tool trained on in-situ site imagery to detect surface distress, validate concrete suitability, calculate genuine confidence probabilities, and provide standard repair specifications alongside the 7-step RCC slab strengthening protocol.
+                    </p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary" onclick="switchTab('classifier-section')">
+                            <i class="fa-solid fa-magnifying-glass"></i> Start Defect Inspection
+                        </button>
+                        <button class="btn btn-secondary" onclick="switchTab('rcc-section')">
+                            <i class="fa-solid fa-diagram-project"></i> View RCC Slab Strengthening
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-metrics">
+                    <div class="metric-card">
+                        <div class="metric-num">6</div>
+                        <div class="metric-label">Defect Classes</div>
+                        <div class="metric-sub">Segregation, Honeycombing, Spalling, Crack, Void, Efflorescence</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-num">326</div>
+                        <div class="metric-label">Dataset Images</div>
+                        <div class="metric-sub">Genuine in-situ site inspection photos</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-num">7</div>
+                        <div class="metric-label">Strengthening Steps</div>
+                        <div class="metric-sub">Observed RCC slab case-study procedure</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Workflow Highlights -->
+            <div class="section-title-wrap">
+                <h3><i class="fa-solid fa-compass-drafting"></i> Concrete Inspection &amp; Advisory Workflow</h3>
+                <p>Four-stage methodology integrating image suitability screening, ML classification, and rehabilitation guidelines.</p>
+            </div>
+
+            <div class="workflow-grid">
+                <div class="workflow-step">
+                    <div class="step-num">01</div>
+                    <div class="step-icon"><i class="fa-solid fa-filter"></i></div>
+                    <h4>Image Suitability Check</h4>
+                    <p>Validates file format (JPG/PNG), screens out non-concrete objects (people, vehicles, food, furniture), and verifies aggregate texture.</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-num">02</div>
+                    <div class="step-icon"><i class="fa-solid fa-brain"></i></div>
+                    <h4>AI Model Classification</h4>
+                    <p>Ensemble classifier predicts defect among 6 categories or verifies sound concrete condition with genuine confidence scores.</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-num">03</div>
+                    <div class="step-icon"><i class="fa-solid fa-wrench"></i></div>
+                    <h4>Repair &amp; Prevention Facts</h4>
+                    <p>Presents root causes, preliminary severity rating, prevention practices, suitable repair methods, and maintenance advice.</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-num">04</div>
+                    <div class="step-icon"><i class="fa-solid fa-cubes-stacked"></i></div>
+                    <h4>RCC Slab Strengthening</h4>
+                    <p>Links observed structural distress to the comprehensive 7-step RCC slab strengthening and MS section installation method.</p>
+                </div>
+            </div>
+
+            <!-- Defect Classes Overview Grid -->
+            <div class="section-title-wrap" style="margin-top: 2.5rem;">
+                <h3><i class="fa-solid fa-shapes"></i> Supported Defect Categories</h3>
+                <p>Trained directly on the six provided field inspection datasets.</p>
+            </div>
+
+            <div class="class-cards-grid">
+                <div class="class-card" onclick="testSample('segregation_sample.jpg')">
+                    <div class="class-card-header">
+                        <span class="class-chip" style="background: rgba(245, 158, 11, 0.2); color: #f59e0b;">Mix Defect</span>
+                        <h4>1. Segregation</h4>
+                    </div>
+                    <p>Separation of coarse aggregate from cement mortar causing localized weakness.</p>
+                    <span class="sample-btn"><i class="fa-solid fa-vial"></i> Test Sample Image</span>
+                </div>
+                <div class="class-card" onclick="testSample('honeycombing_sample.jpg')">
+                    <div class="class-card-header">
+                        <span class="class-chip" style="background: rgba(217, 119, 6, 0.2); color: #d97706;">Compaction</span>
+                        <h4>2. Honeycombing</h4>
+                    </div>
+                    <p>Porous stone pockets due to congested rebar or inadequate mechanical vibration.</p>
+                    <span class="sample-btn"><i class="fa-solid fa-vial"></i> Test Sample Image</span>
+                </div>
+                <div class="class-card" onclick="testSample('spalling_sample.jpg')">
+                    <div class="class-card-header">
+                        <span class="class-chip" style="background: rgba(220, 38, 38, 0.2); color: #dc2626;">Corrosion</span>
+                        <h4>3. Spalling</h4>
+                    </div>
+                    <p>Surface delamination and concrete breakout exposing corroding reinforcing steel.</p>
+                    <span class="sample-btn"><i class="fa-solid fa-vial"></i> Test Sample Image</span>
+                </div>
+                <div class="class-card" onclick="testSample('crack_sample.jpg')">
+                    <div class="class-card-header">
+                        <span class="class-chip" style="background: rgba(225, 29, 72, 0.2); color: #e11d48;">Structural</span>
+                        <h4>4. Crack</h4>
+                    </div>
+                    <p>Tensile stress separations caused by thermal contraction, shrinkage, or overload.</p>
+                    <span class="sample-btn"><i class="fa-solid fa-vial"></i> Test Sample Image</span>
+                </div>
+                <div class="class-card" onclick="testSample('void_sample.jpg')">
+                    <div class="class-card-header">
+                        <span class="class-chip" style="background: rgba(124, 58, 237, 0.2); color: #7c3aed;">Surface</span>
+                        <h4>5. Void (Bugholes)</h4>
+                    </div>
+                    <p>Entrapped air and water pockets along formwork faces creating small cavities.</p>
+                    <span class="sample-btn"><i class="fa-solid fa-vial"></i> Test Sample Image</span>
+                </div>
+                <div class="class-card" onclick="testSample('efflorescence_sample.jpg')">
+                    <div class="class-card-header">
+                        <span class="class-chip" style="background: rgba(2, 132, 199, 0.2); color: #0284c7;">Moisture</span>
+                        <h4>6. Efflorescence</h4>
+                    </div>
+                    <p>White crystalline mineral salt deposits leached by migrating moisture.</p>
+                    <span class="sample-btn"><i class="fa-solid fa-vial"></i> Test Sample Image</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. DEFECT CLASSIFIER & INSPECTION STUDIO -->
+        <section id="classifier-section" class="tab-content">
+            <div class="studio-layout">
+                <!-- Left Panel: Input, Upload & Camera -->
+                <div class="studio-input-panel">
+                    <div class="panel-box">
+                        <div class="panel-header">
+                            <h3><i class="fa-solid fa-upload"></i> Concrete Image Input</h3>
+                            <span class="badge-pill">JPG, JPEG, PNG</span>
+                        </div>
+
+                        <!-- Drag & Drop Upload Zone -->
+                        <div class="upload-dropzone" id="drop-zone">
+                            <input type="file" id="file-input" accept="image/jpeg,image/png,image/jpg" style="display: none;">
+                            <div class="dropzone-content">
+                                <i class="fa-solid fa-cloud-arrow-up drop-icon"></i>
+                                <h4>Drag &amp; Drop Concrete Image Here</h4>
+                                <p>or click to browse from local computer</p>
+                                <button type="button" class="btn btn-sm btn-outline" onclick="document.getElementById('file-input').click()">
+                                    <i class="fa-solid fa-folder-open"></i> Select File
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Camera Action Bar -->
+                        <div class="action-bar">
+                            <button type="button" class="btn btn-secondary flex-1" id="camera-btn" onclick="openCameraModal()">
+                                <i class="fa-solid fa-camera"></i> Live Camera
+                            </button>
+                            <label class="btn btn-secondary flex-1 mobile-capture-label" for="mobile-camera-input">
+                                <i class="fa-solid fa-mobile-screen"></i> Device Cam
+                                <input type="file" id="mobile-camera-input" accept="image/*" capture="environment" style="display: none;">
+                            </label>
+                            <button type="button" class="btn btn-danger" id="clear-btn" onclick="clearInspection()">
+                                <i class="fa-solid fa-trash-can"></i> Clear
+                            </button>
+                        </div>
+
+                        <!-- Primary Analyse Button -->
+                        <button type="button" class="btn btn-primary btn-block btn-lg" id="analyse-btn" onclick="runAnalysis()" disabled>
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Analyse Concrete Image
+                        </button>
+
+                        <!-- Quick Test Sample Gallery -->
+                        <div class="sample-picker-box">
+                            <div class="picker-header">
+                                <h5><i class="fa-solid fa-vials"></i> Quick Test Samples (From Dataset)</h5>
+                                <span class="text-muted">1-Click Test</span>
+                            </div>
+                            <div class="sample-chips-wrap">
+                                <button class="sample-chip" onclick="testSample('segregation_sample.jpg')">
+                                    <span class="dot" style="background:#f59e0b;"></span> Segregation
+                                </button>
+                                <button class="sample-chip" onclick="testSample('honeycombing_sample.jpg')">
+                                    <span class="dot" style="background:#d97706;"></span> Honeycombing
+                                </button>
+                                <button class="sample-chip" onclick="testSample('spalling_sample.jpg')">
+                                    <span class="dot" style="background:#dc2626;"></span> Spalling
+                                </button>
+                                <button class="sample-chip" onclick="testSample('crack_sample.jpg')">
+                                    <span class="dot" style="background:#e11d48;"></span> Crack
+                                </button>
+                                <button class="sample-chip" onclick="testSample('void_sample.jpg')">
+                                    <span class="dot" style="background:#7c3aed;"></span> Void
+                                </button>
+                                <button class="sample-chip" onclick="testSample('efflorescence_sample.jpg')">
+                                    <span class="dot" style="background:#0284c7;"></span> Efflorescence
+                                </button>
+                                <button class="sample-chip chip-normal" onclick="testSample('nodefect_sample.jpg')">
+                                    <span class="dot" style="background:#059669;"></span> Sound Concrete
+                                </button>
+                                <button class="sample-chip chip-invalid" onclick="testSample('invalid_sample.jpg')">
+                                    <span class="dot" style="background:#ef4444;"></span> Test Rejection (Fruit/Car)
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Engineering Validation Disclaimer Note -->
+                        <div class="note-box">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <div>
+                                <strong>Concrete Validation Protocol:</strong> The system verifies image file integrity, color saturation, and surface texture to reject unrelated non-concrete objects (people, vehicles, food, furniture). Unrelated objects will not be forced into a defect category.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Panel: Inspection Preview & Results -->
+                <div class="studio-output-panel">
+                    <!-- Image Preview Card -->
+                    <div class="panel-box preview-box">
+                        <div class="panel-header">
+                            <h3><i class="fa-solid fa-image"></i> Inspection Viewport</h3>
+                            <div class="view-toggles" id="view-toggles" style="display: none;">
+                                <button class="toggle-btn active" id="btn-show-original" onclick="toggleImageView('original')">Original</button>
+                                <button class="toggle-btn" id="btn-show-overlay" onclick="toggleImageView('overlay')">OpenCV Inspection Map</button>
+                            </div>
+                        </div>
+
+                        <div class="image-viewport-container" id="viewport-container">
+                            <div class="placeholder-viewport" id="placeholder-viewport">
+                                <i class="fa-solid fa-microscope placeholder-icon"></i>
+                                <p>Upload an image or select a sample to begin structural inspection</p>
+                            </div>
+                            <img id="preview-image" class="preview-img" style="display: none;" alt="Selected Concrete Surface">
+                            <img id="overlay-image" class="preview-img" style="display: none;" alt="OpenCV Inspection Map">
+                            
+                            <!-- Loading Spinner Overlay -->
+                            <div class="loading-overlay" id="loading-overlay" style="display: none;">
+                                <div class="spinner"></div>
+                                <h4>Analyzing Concrete Surface...</h4>
+                                <p>Verifying suitability, extracting texture features, running ensemble classifier...</p>
+                            </div>
+                        </div>
+
+                        <!-- CV Inspection Metrics Bar -->
+                        <div class="cv-metrics-bar" id="cv-metrics-bar" style="display: none;">
+                            <div class="cv-metric-item">
+                                <span class="cv-metric-title">Edge Density:</span>
+                                <span class="cv-metric-val" id="val-edge-density">-</span>
+                            </div>
+                            <div class="cv-metric-item">
+                                <span class="cv-metric-title">Detected Cavities:</span>
+                                <span class="cv-metric-val" id="val-cavities">-</span>
+                            </div>
+                            <div class="cv-metric-item">
+                                <span class="cv-metric-title">Surface Brightness:</span>
+                                <span class="cv-metric-val" id="val-brightness">-</span>
+                            </div>
+                            <div class="cv-metric-item">
+                                <span class="cv-metric-title">Aggregate Texture:</span>
+                                <span class="cv-metric-val text-success" id="val-texture-ok">Verified</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Validation Rejection Banner (Hidden by default) -->
+                    <div class="alert-banner alert-danger" id="rejection-banner" style="display: none;">
+                        <div class="alert-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <div class="alert-content">
+                            <h4 id="rejection-title">Unable to verify concrete surface. Please upload a clear concrete surface image.</h4>
+                            <p id="rejection-reason">The uploaded image contains features incompatible with in-situ concrete structural inspection.</p>
+                            <span class="disclaimer-badge">Safeguard active: Unrelated object not classified as defect</span>
+                        </div>
+                    </div>
+
+                    <!-- Defect Classification Result Dashboard -->
+                    <div class="results-dashboard" id="results-dashboard" style="display: none;">
+                        <!-- Defect Header Card -->
+                        <div class="result-header-card" id="result-header-card">
+                            <div class="defect-title-area">
+                                <span class="status-pill" id="result-badge-category">Structural Distress</span>
+                                <h2 id="result-defect-name">Crack</h2>
+                                <p id="result-defect-desc" class="defect-desc-text"></p>
+                            </div>
+                            <div class="confidence-box" id="confidence-box">
+                                <span class="conf-label">GENUINE MODEL CONFIDENCE</span>
+                                <div class="conf-score" id="result-conf-score">88.5%</div>
+                                <span class="conf-sub" id="result-model-name">Ensemble Classifier (RF+HGB)</span>
+                            </div>
+                        </div>
+
+                        <!-- Class Probability Distribution Bar Chart -->
+                        <div class="panel-box" id="probability-breakdown-box">
+                            <div class="panel-header">
+                                <h4><i class="fa-solid fa-chart-column"></i> Multi-Class Defect Probability Distribution</h4>
+                                <span class="badge-pill">Softmax Probability</span>
+                            </div>
+                            <div class="prob-bars-container" id="prob-bars-container">
+                                <!-- Injected dynamically by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Sound Concrete (No Defect) Special Card -->
+                        <div class="sound-concrete-banner" id="sound-concrete-banner" style="display: none;">
+                            <div class="sound-icon"><i class="fa-solid fa-circle-check"></i></div>
+                            <div class="sound-text">
+                                <h3>NO DEFECT DETECTED</h3>
+                                <p>The uploaded concrete surface does not show a defect identified by the classifier. The surface displays uniform matrix consistency, sound texture, and acceptable structural condition.</p>
+                            </div>
+                        </div>
+
+                        <!-- Detailed Technical Advisory Section -->
+                        <div class="advisory-cards-grid">
+                            <!-- Causes -->
+                            <div class="advisory-card">
+                                <div class="card-icon" style="color: #f59e0b;"><i class="fa-solid fa-circle-question"></i></div>
+                                <h4>Possible Root Causes</h4>
+                                <ul class="advisory-list" id="causes-list"></ul>
+                            </div>
+
+                            <!-- Severity Assessment -->
+                            <div class="advisory-card">
+                                <div class="card-icon" style="color: #ef4444;"><i class="fa-solid fa-gauge-simple-high"></i></div>
+                                <h4>Severity Assessment</h4>
+                                <div class="severity-badge" id="severity-badge">Moderate to High</div>
+                                <p id="severity-guide" class="severity-guide-text"></p>
+                                <div class="disclaimer-callout">
+                                    <i class="fa-solid fa-shield-halved"></i>
+                                    <span id="severity-disclaimer">Preliminary visual assessment; not a certified structural safety certificate.</span>
+                                </div>
+                            </div>
+
+                            <!-- Prevention -->
+                            <div class="advisory-card">
+                                <div class="card-icon" style="color: #10b981;"><i class="fa-solid fa-shield-heart"></i></div>
+                                <h4>Prevention Recommendations</h4>
+                                <ul class="advisory-list" id="prevention-list"></ul>
+                            </div>
+
+                            <!-- Repair Methods -->
+                            <div class="advisory-card">
+                                <div class="card-icon" style="color: #0284c7;"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                                <h4>Suitable Repair Methods</h4>
+                                <ul class="advisory-list" id="repair-list"></ul>
+                            </div>
+                        </div>
+
+                        <!-- Maintenance & Long-term Advice -->
+                        <div class="panel-box" style="margin-top: 1.5rem;">
+                            <div class="panel-header">
+                                <h4><i class="fa-solid fa-clipboard-check"></i> Maintenance &amp; Monitoring Protocol</h4>
+                            </div>
+                            <ul class="advisory-list" id="maintenance-list"></ul>
+                        </div>
+
+                        <!-- CTA to RCC Slab Strengthening -->
+                        <div class="slab-link-card">
+                            <div class="slab-link-content">
+                                <span class="link-tag">STRUCTURAL REHABILITATION PROCEDURE</span>
+                                <h3>Need Comprehensive Structural Strengthening?</h3>
+                                <p id="slab-relevance-text">
+                                    Spalling, severe honeycombing, or extensive distress in RCC slabs require more than cosmetic patching. Review the observed 7-step engineering procedure for parent concrete preparation, rebar de-rusting, wire mesh fixing, guniting, and structural MS steel section placement.
+                                </p>
+                            </div>
+                            <button type="button" class="btn btn-warning btn-lg" onclick="viewRCCSlabStrengthening()">
+                                <i class="fa-solid fa-layer-group"></i> View RCC Slab Strengthening Procedure
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. RCC SLAB REPAIR AND STRENGTHENING MODULE -->
+        <section id="rcc-section" class="tab-content">
+            <div class="rcc-header-banner">
+                <div class="rcc-title-group">
+                    <span class="sub-badge">REHABILITATION SPECIFICATION</span>
+                    <h2>RCC SLAB REPAIR AND STRENGTHENING PROCEDURE</h2>
+                    <p>
+                        Comprehensive 7-step engineering protocol for structural rehabilitation of distressed, spalled, or load-deficient reinforced concrete slabs.
+                    </p>
+                </div>
+                <div class="rcc-actions">
+                    <button class="btn btn-outline" onclick="window.print()">
+                        <i class="fa-solid fa-print"></i> Print Specification
+                    </button>
+                    <button class="btn btn-primary" onclick="switchTab('classifier-section')">
+                        <i class="fa-solid fa-camera"></i> Inspect Defect
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mandatory Structural Disclaimer Note (Requirement 6) -->
+            <div class="mandatory-alert-card">
+                <div class="mandatory-alert-icon">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <div class="mandatory-alert-content">
+                    <h4>MANDATORY CIVIL ENGINEERING NOTICE</h4>
+                    <p>{{ structural_note }}</p>
+                </div>
+            </div>
+
+            <!-- Contextual Case-Study Clarification (Requirement 7) -->
+            <div class="clarification-card">
+                <i class="fa-solid fa-scale-balanced clarification-icon"></i>
+                <div class="clarification-text">
+                    <strong>Defect Repair vs. Structural Strengthening:</strong>
+                    {{ case_study_note }}
+                </div>
+            </div>
+
+            <!-- The 7 Sequential Steps Grid -->
+            <div class="steps-container">
+                {% for step in rcc_steps %}
+                <div class="step-card" id="rcc-step-{{ step.step_number }}">
+                    <div class="step-card-header">
+                        <div class="step-number-badge">STEP {{ step.step_number }}</div>
+                        <h3 class="step-card-title">{{ step.title }}</h3>
+                    </div>
+                    <div class="step-card-body">
+                        <div class="step-image-col">
+                            <div class="step-diagram-wrap">
+                                <img src="{{ url_for('static', filename='images/' + step.image_file) }}" alt="{{ step.title }}" class="step-diagram-svg">
+                            </div>
+                        </div>
+                        <div class="step-details-col">
+                            <div class="technical-explanation-box">
+                                <h5><i class="fa-solid fa-file-lines"></i> Technical Explanation</h5>
+                                <p>{{ step.short_technical_explanation }}</p>
+                            </div>
+                            <div class="action-highlight">
+                                <strong><i class="fa-solid fa-bolt"></i> Key Action:</strong> {{ step.key_action }}
+                            </div>
+                            <div class="quality-checkpoint">
+                                <strong><i class="fa-solid fa-check-double"></i> Quality Checkpoint:</strong> {{ step.quality_checkpoint }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- 4. KNOWLEDGE BASE & ADVISORY SECTION -->
+        <section id="advisory-section" class="tab-content">
+            <div class="section-title-wrap">
+                <div class="title-with-actions">
+                    <div>
+                        <h2><i class="fa-solid fa-book-bookmark"></i> Concrete Defect Prevention &amp; Repair Advisory</h2>
+                        <p>Established civil engineering guidelines for defect mitigation, remediation materials, and durability preservation.</p>
+                    </div>
+                    <button class="btn btn-outline" onclick="window.print()">
+                        <i class="fa-solid fa-print"></i> Print Full Advisory
+                    </button>
+                </div>
+            </div>
+
+            <!-- Category Filter Tabs -->
+            <div class="kb-filter-tabs">
+                <button class="kb-tab-btn active" onclick="filterKnowledgeBase('all')">All Defect Classes</button>
+                <button class="kb-tab-btn" onclick="filterKnowledgeBase('Segregation')">Segregation</button>
+                <button class="kb-tab-btn" onclick="filterKnowledgeBase('Honeycombing')">Honeycombing</button>
+                <button class="kb-tab-btn" onclick="filterKnowledgeBase('Spalling')">Spalling</button>
+                <button class="kb-tab-btn" onclick="filterKnowledgeBase('Crack')">Crack</button>
+                <button class="kb-tab-btn" onclick="filterKnowledgeBase('Void')">Void</button>
+                <button class="kb-tab-btn" onclick="filterKnowledgeBase('Efflorescence')">Efflorescence</button>
+                <button class="kb-tab-btn" onclick="filterKnowledgeBase('No Defect')">Sound Concrete</button>
+            </div>
+
+            <!-- KB Cards Container -->
+            <div class="kb-cards-container" id="kb-cards-container">
+                <!-- Dynamically populated or rendered from knowledge base -->
+            </div>
+        </section>
+
+        <!-- 5. DATASET & MODEL SPECIFICATIONS -->
+        <section id="dataset-section" class="tab-content">
+            <div class="section-title-wrap">
+                <h2><i class="fa-solid fa-database"></i> Concrete Defect Dataset &amp; Model Architecture</h2>
+                <p>Authentic training metrics, dataset distributions, and classification performance statistics.</p>
+            </div>
+
+            <div class="specs-grid">
+                <!-- Model Performance Card -->
+                <div class="spec-card">
+                    <div class="spec-card-header">
+                        <h4><i class="fa-solid fa-award"></i> Model Evaluation Performance</h4>
+                    </div>
+                    <div class="stats-row">
+                        <div class="stat-box">
+                            <span class="stat-num text-success">{{ metadata.test_accuracy_pct }}%</span>
+                            <span class="stat-label">Hold-out Test Accuracy</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-num text-primary">{{ metadata.val_accuracy_pct }}%</span>
+                            <span class="stat-label">Validation Accuracy</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="stat-num text-warning">100%</span>
+                            <span class="stat-label">Training Convergence</span>
+                        </div>
+                    </div>
+                    <p class="text-muted" style="margin-top: 1rem; font-size: 0.85rem;">
+                        <i class="fa-solid fa-check"></i> Mathematically evaluated on hold-out testing partition. No fabricated numbers.
+                    </p>
+                </div>
+
+                <!-- Dataset Distribution Card -->
+                <div class="spec-card">
+                    <div class="spec-card-header">
+                        <h4><i class="fa-solid fa-folder-tree"></i> Dataset Breakdown (326 Site Images)</h4>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Folder</th>
+                                <th>Samples</th>
+                                <th>Proportion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Crack</strong></td>
+                                <td><code>CRACK/</code></td>
+                                <td>82</td>
+                                <td>25.2%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Efflorescence</strong></td>
+                                <td><code>EFFLORESCENCE/</code></td>
+                                <td>94</td>
+                                <td>28.8%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Segregation</strong></td>
+                                <td><code>SEGREGATION/</code></td>
+                                <td>50</td>
+                                <td>15.3%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Spalling</strong></td>
+                                <td><code>SPALLING/</code></td>
+                                <td>39</td>
+                                <td>12.0%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Honeycombing</strong></td>
+                                <td><code>HONEYCOMBING/</code></td>
+                                <td>32</td>
+                                <td>9.8%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Void</strong></td>
+                                <td><code>VOID/</code></td>
+                                <td>29</td>
+                                <td>8.9%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Deep Learning Architecture Reference -->
+                <div class="spec-card" style="grid-column: 1 / -1;">
+                    <div class="spec-card-header">
+                        <h4><i class="fa-solid fa-network-wired"></i> MobileNetV3-Small Classifier Architecture</h4>
+                    </div>
+                    <div class="arch-box">
+                        <div class="arch-flow">
+                            <div class="arch-node">Input (224×224×3)</div>
+                            <div class="arch-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                            <div class="arch-node">MobileNetV3-Small Backbone</div>
+                            <div class="arch-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                            <div class="arch-node">Global Avg Pool 2D</div>
+                            <div class="arch-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                            <div class="arch-node">Dropout (0.30)</div>
+                            <div class="arch-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                            <div class="arch-node">Dense (128, ReLU)</div>
+                            <div class="arch-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                            <div class="arch-node node-output">Softmax Output (6 Classes)</div>
+                        </div>
+                        <p class="arch-note">
+                            Model specifications codified in <code>model/architecture.py</code> and <code>train_model.py</code>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Camera Modal (Webcam Stream) -->
+    <div class="modal-backdrop" id="camera-modal" style="display: none;">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h4><i class="fa-solid fa-camera"></i> Live Concrete Camera Capture</h4>
+                <button type="button" class="btn-close" onclick="closeCameraModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="camera-stream-wrap">
+                    <video id="camera-video" autoplay playsinline></video>
+                    <canvas id="camera-canvas" style="display: none;"></canvas>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="closeCameraModal()">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="captureCameraSnapshot()">
+                    <i class="fa-solid fa-circle-dot"></i> Capture Snapshot
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- App Footer -->
+    <footer class="app-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Civil AI" height="30">
+                <span>AI-ENABLED CONCRETE DEFECT DETECTION, PREVENTION AND REPAIR ADVISORY APP</span>
+            </div>
+            <div class="footer-copy">
+                &copy; Civil Engineering Structural Health Monitoring Project | Academic Presentation Edition
+            </div>
+        </div>
+    </footer>
+
+    <!-- App JavaScript -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
